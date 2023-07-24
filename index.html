@@ -20,27 +20,23 @@
     </nav>
     <div class="main">
         <div class="layer1">
+                <form action="" class="input_box" spellcheck="false">
+                    <label for="">Enter your Code here : </label>
+                    <textarea name="" id="codein" cols="30" rows="10"></textarea>
+                </form>
+
+            <form action="" class="output_box" spellcheck="false">
+                <label id="in" or="">Language:</label>
+                <textarea name="" id="lang" cols="30" rows="10" wrap="hard"></textarea>
+                <br>
+                <label for="">Time complexity:</label>
+                <textarea name="" id="tc" cols="30" rows="10"></textarea>
+                <br>
+                <label for="">Space complexity:</label>
+                <textarea name="" id="sc" cols="30" rows="10"></textarea>
+            </form>
             
-            <div class="input_box">
-                <input type="text" id="codein">
-            </div>
 
-            <div class="output_box">
-
-                <div class="Language">
-                    <input type="text" id="lang">
-                </div>
-                
-                <div class="Time">
-                    <input type="text" id="tc">
-                </div>
-                
-                <div class="Space">
-                    <input type="text"id="sc">
-                </div>
-
-            </div>
-            
         </div>
 
         <div class="layer2">
@@ -49,8 +45,12 @@
                 <div><input type="radio" value="Space" name="option"> Space Complexity</div>
                 <div><input type="radio" value="both" name="option"> Both</div>
             </div>
-        </div>
+            <div class="sub_btn">
+                <a href="https://www.google.com" style="text-decoration: none; background-color: inherit;"><button id="get">Proceed</button></a>
+            </div>
+        </div>  
     </div>
 </body>
+<script src="./js/main.js"></script>
 
 </html>
