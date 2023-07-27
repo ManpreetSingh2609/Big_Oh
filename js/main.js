@@ -1,75 +1,46 @@
-// Replace 'YOUR_API_KEY' with the API key you obtained from OpenAI
-const API_KEY = 'YOUR_API_KEY';
-const API_ENDPOINT = 'https://api.openai.com/v1/engines/gpt-3.5-turbo/answers';
+import { Configuration, OpenAIApi } from "openai";
 
-// Function to get time and space complexity using ChatGPT API
-async function getTimeSpaceComplexity(question, context) {
-  const headers = {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${API_KEY}`,
-  };
+function analyzeCode() {
+  
+const configuration = new Configuration({
+  organization: "org-6nbEsI2nYBwlonNiGB2KBvup",
+  apiKey: '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';
+});
+const openai = new OpenAIApi(configuration);
+const response = await openai.listEngines();
+  const codeInput = document.getElementById("codein").value;
 
-  const data = {
-    prompt: question,
-    max_tokens: 100,
-    temperature: 0,
-    stop: '\n',
-  };
+  // Replace 'YOUR_CHATGPT_API_KEY' with your actual ChatGPT API key
+  const apiKey = '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';
 
-  const response = await fetch(API_ENDPOINT, {
+  // Make a request to the ChatGPT API using the fetch API
+  fetch('https://api.openai.com/v1/engines/code-completion-codex/completions', {
     method: 'POST',
-    headers: headers,
-    body: JSON.stringify(data),
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      prompt: codeInput,
+      max_tokens: 150,
+      n: 1,
+      stop: '\n',
+    }),
+  })
+  .then(response => response.json())
+  .then(data => {
+    // Process the API response to extract relevant information
+    const completion = data.choices[0].text.trim();
+    const language = 'JavaScript'; // Since we are detecting JavaScript code, you can expand this to handle multiple languages
+    const timeComplexity = 'O(n)'; // Replace this with the actual time complexity determined by your code analysis logic
+    const spaceComplexity = 'O(1)'; // Replace this with the actual space complexity determined by your code analysis logic
+
+    // Display the results to the user (you can adjust this to your preferred output format)
+    alert(`Detected Language: ${language}\nTime Complexity: ${timeComplexity}\nSpace Complexity: ${spaceComplexity}`);
+  })
+  .catch(error => {
+    // Handle errors if any
+    console.error('Error analyzing code:', error);
+    alert('An error occurred while analyzing the code.');
   });
-
-  if (response.ok) {
-    const result = await response.json();
-    // Process the response and extract the relevant information
-    const answer = result.answers[0].text;
-    return answer;
-  } else {
-    return null;
-  }
 }
-
-// Function to detect the language using ChatGPT API
-async function detectLanguage(text) {
-  const headers = {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${API_KEY}`,
-  };
-
-  const data = {
-    prompt: `Detect the language of the following text: '${text}'`,
-    max_tokens: 100,
-    temperature: 0,
-    stop: '\n',
-  };
-
-  const response = await fetch(API_ENDPOINT, {
-    method: 'POST',
-    headers: headers,
-    body: JSON.stringify(data),
-  });
-
-  if (response.ok) {
-    const result = await response.json();
-    // Process the response and extract the detected language
-    const language = result.choices[0].text.trim();
-    return language;
-  } else {
-    return null;
-  }
-}
-
-// Usage example
-const question = "What is the time and space complexity of quicksort algorithm?";
-const context = "Quicksort is a sorting algorithm...";
-getTimeSpaceComplexity(question, context)
-  .then(answer => console.log(answer))
-  .catch(error => console.error(error));
-
-const textToDetectLanguage = "This is a sample text to detect the language.";
-detectLanguage(textToDetectLanguage)
-  .then(language => console.log(language))
-  .catch(error => console.error(error));

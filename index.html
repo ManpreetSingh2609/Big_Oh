@@ -20,22 +20,22 @@
     </nav>
     <div class="main">
         <div class="layer1">
-                <form action="" class="input_box" spellcheck="false">
-                    <label for="">Enter your Code here : </label>
-                    <textarea name="" id="codein" cols="30" rows="10"></textarea>
-                </form>
+            <form action="" class="input_box" spellcheck="false" method="get">
+                <label for="">Enter your Code here : </label>
+                <textarea name="" id="codein" cols="30" rows="10"></textarea>
+            </form>
 
             <form action="" class="output_box" spellcheck="false">
                 <label id="in" or="">Language:</label>
-                <textarea name="" id="lang" cols="30" rows="10" wrap="hard"></textarea>
+                <textarea name="" id="lang" cols="30" rows="10" wrap="hard" disabled></textarea>
                 <br>
                 <label for="">Time complexity:</label>
-                <textarea name="" id="tc" cols="30" rows="10"></textarea>
+                <textarea name="" id="tc" cols="30" rows="10" disabled></textarea>
                 <br>
                 <label for="">Space complexity:</label>
-                <textarea name="" id="sc" cols="30" rows="10"></textarea>
+                <textarea name="" id="sc" cols="30" rows="10" disabled></textarea>
             </form>
-            
+
 
         </div>
 
@@ -45,12 +45,12 @@
                 <div><input type="radio" value="Space" name="option"> Space Complexity</div>
                 <div><input type="radio" value="both" name="option"> Both</div>
             </div>
-            <div class="sub_btn">
-                <a href="https://www.google.com" style="text-decoration: none; background-color: inherit;"><button id="get">Proceed</button></a>
-            </div>
-        </div>  
+            <!-- <div class="sub_btn"><button type="submit" onclick="alert(hello)" id="get">Proceed</button>
+            </div> -->
+            <button type="submit" id="get" onclick="analyzeCode()">Proceed</button>
+        </div>
     </div>
 </body>
-<script src="./js/main.js"></script>
+<script src="./js/main.js" ></script>
 
 </html>
